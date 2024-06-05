@@ -37,7 +37,7 @@ function App() {
                 }
             </div>
         <div className='card'>
-            <Editor value={text} theme='bubble' onChange={e => setText(e.htmlValue)} style={{ height: '480px'}}/>
+            <Editor value={text}  onChange={e => setText(e.htmlValue)} style={{ height: '480px'}}/>
         </div>
     </section>
   );
