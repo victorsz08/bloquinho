@@ -29,7 +29,7 @@
 
 .data_container input {
   padding: .5rem .8rem;
-  border: none;
+  border: 1px solid #000;
   border-radius: 1.2rem;
   margin-right: 1rem;
 }
