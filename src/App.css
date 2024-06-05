@@ -19,7 +19,7 @@
 .search-cep button {
   font-weight: 800;
   padding: .5rem .8rem;
-  border: none;
+  border: 1px solid #000;
   background-color: #000;
   color: #FFF;
   border-radius: 1.2rem;
