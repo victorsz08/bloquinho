@@ -1,24 +1,45 @@
-import logo from './logo.svg';
 import './App.css';
+import { Editor } from 'primereact/editor';
+
+import React, { useState } from 'react'
 
 function App() {
+  const [text, setText] = useState('')
+  const [data, setData] = useState('');
+  const [response, setResponse] = useState('');
+
+  const searchCep = async () => {
+        const res = await fetch(`https://opencep.com/v1/${data}`).then(res => res.json());
+
+        setResponse(res)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <section className='app'>
+      <div className='search-cep'>
+                {!response ? 
+                <div className='data_container'>
+                <input value={data} onChange={e => setData(e.target.value)} placeholder='Digite o cep'/>
+                <button onClick={searchCep}>Buscar</button>
+                </div>
+                :
+                <div className='data_container'>
+                    <h3><strong>RUA:</strong>{response.logradouro}</h3>
+                    <h3><strong>BAIRRO:</strong>{response.bairro}</h3>
+                    <h3><strong>CIDADE:</strong>{response.localidade}</h3>
+                    <h3><strong>ESTADO:</strong>{response.uf}</h3>
+                    <h3><strong>CEP:</strong>{response.cep}</h3>
+                    <button onClick={() => {
+                      setResponse("");
+                      setData("")
+                    }}>Nova Busca</button>
+                </div>
+                }
+            </div>
+        <div className='card'>
+            <Editor value={text} onChange={e => setText(e.htmlValue)} style={{ height: '700px'}}/>
+        </div>
+    </section>
   );
 }
 
